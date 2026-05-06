@@ -42,7 +42,7 @@ public class Run1CBase {
         // Загружаем историю из XML-файла в домашней папке
         loadHistoryFromXml();
 
-        JFrame frame = new JFrame("Построитель команды запуска 1С");
+        JFrame frame = new JFrame("Построитель команды запуска 1С " + "Примеры: File=\"C:\\1C\\Base\";  или  Srvr=\"127.0.0.1\";Ref=\"Base\";");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(950, SHOW_DEBUG_PANEL ? 700 : 500);
         frame.setLayout(new FlowLayout());
@@ -66,10 +66,10 @@ public class Run1CBase {
 
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        JPanel hintPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        hintPanel.add(new JLabel("Примеры: File=\"C:\\1C\\Base\";  или  Srvr=\"127.0.0.1\";Ref=\"Base\";"));
-        hintPanel.setFont(new Font("Arial", Font.ITALIC, 10));
-        panel.add(hintPanel);
+        // JPanel hintPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        // hintPanel.add(new JLabel("Примеры: File=\"C:\\1C\\Base\";  или  Srvr=\"127.0.0.1\";Ref=\"Base\";"));
+        // hintPanel.setFont(new Font("Arial", Font.ITALIC, 10));
+        // panel.add(hintPanel);
 
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
