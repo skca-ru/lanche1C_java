@@ -118,7 +118,7 @@ public class Run1CBase {
         JPanel buttonPanel86 = new JPanel(new GridLayout(2, 1, 5, 5));
         JButton copy86 = new JButton("Copy");
         copy86.addActionListener(e -> copyToClipboard(outputArea86.getText()));
-        JButton run86 = new JButton("Запустить");
+        JButton run86 = new JButton("Run");
         run86.addActionListener(e -> runCommand(outputArea86.getText(), "x86"));
         buttonPanel86.add(copy86);
         buttonPanel86.add(run86);
@@ -139,7 +139,7 @@ public class Run1CBase {
         JPanel buttonPanel64 = new JPanel(new GridLayout(2, 1, 5, 5));
         JButton copy64 = new JButton("Copy");
         copy64.addActionListener(e -> copyToClipboard(outputArea.getText()));
-        JButton run64 = new JButton("Запустить");
+        JButton run64 = new JButton("Run");
         run64.addActionListener(e -> runCommand(outputArea.getText(), "x64"));
         buttonPanel64.add(copy64);
         buttonPanel64.add(run64);
