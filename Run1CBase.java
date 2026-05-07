@@ -52,7 +52,7 @@ public class Run1CBase {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        inputPanel.add(new JLabel("Введите адрес БД:"));
+        inputPanel.add(new JLabel("Введите адрес:"));
 
         historyModel = new DefaultComboBoxModel<>();
         for (String addr : getHistoryList()) {
