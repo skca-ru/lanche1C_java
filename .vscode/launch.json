@@ -1,0 +1,12 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        
+        {
+            "type": "java",
+            "name": "Debug Run1CBase",
+            "request": "launch",
+            "mainClass": "Run1CBase",
+        }
+    ]
+}
