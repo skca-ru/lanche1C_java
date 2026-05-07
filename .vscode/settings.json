@@ -1,6 +1,3 @@
 {
-    "files.encoding": "windows1251",
-    "files.autoGuessEncoding": false,
-    "terminal.integrated.defaultProfile.windows": "Command Prompt",
-    "terminal.integrated.shellArgs.windows": ["/c", "chcp", "1251"]
+    
 }
