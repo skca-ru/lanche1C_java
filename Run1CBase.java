@@ -339,6 +339,7 @@ private static void autoPasteFromClipboard() {
     try {
         java.awt.datatransfer.Clipboard clipboard = java.awt.Toolkit.getDefaultToolkit().getSystemClipboard();
         java.awt.datatransfer.Transferable contents = clipboard.getContents(null);
+        
         if (contents != null && contents.isDataFlavorSupported(java.awt.datatransfer.DataFlavor.stringFlavor)) {
             String text = (String) contents.getTransferData(java.awt.datatransfer.DataFlavor.stringFlavor);
             if (isDatabaseAddress(text)) {
@@ -346,10 +347,17 @@ private static void autoPasteFromClipboard() {
                 JOptionPane.showMessageDialog(null,
                         "Обнаружен адрес базы 1С в буфере обмена!\n\nАвтоматически вставлено:\n" + text,
                         "Автовставка из буфера", JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
         }
+        // Если адреса нет в буфере — оставляем поле пустым
+        addressComboBox.setSelectedItem(null);
+        addressComboBox.getEditor().setItem("");
+        
     } catch (Exception e) {
-        // Игнорируем
+        // При ошибке тоже очищаем поле
+        addressComboBox.setSelectedItem(null);
+        addressComboBox.getEditor().setItem("");
     }
 }
     private static String getCurrentAddress() {
