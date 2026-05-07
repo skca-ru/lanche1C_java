@@ -19,7 +19,7 @@ import org.xml.sax.SAXException;
 import javax.swing.text.JTextComponent;
 
 public class Run1CBase {
-    // ========== НАСТРОЙКИ ==========
+    // ========== РќРђРЎРўР РћР™РљР ==========
     private static final boolean SHOW_DEBUG_PANEL = false;
     private static final boolean SHOW_RUN_MESSAGE = true;
     private static final int MAX_HISTORY_SIZE = 20;
@@ -39,10 +39,10 @@ public class Run1CBase {
     private static DefaultComboBoxModel<String> historyModel;
 
     public static void main(String[] args) {
-        // Загружаем историю из XML-файла в домашней папке
+        // Р—Р°РіСЂСѓР¶Р°РµРј РёСЃС‚РѕСЂРёСЋ РёР· XML-С„Р°Р№Р»Р° РІ РґРѕРјР°С€РЅРµР№ РїР°РїРєРµ
         loadHistoryFromXml();
 
-        JFrame frame = new JFrame("Построитель команды запуска 1С " + "Примеры: File=\"C:\\1C\\Base\";  или  Srvr=\"127.0.0.1\";Ref=\"Base\";");
+        JFrame frame = new JFrame("РџРѕСЃС‚СЂРѕРёС‚РµР»СЊ РєРѕРјР°РЅРґС‹ Р·Р°РїСѓСЃРєР° 1РЎ " + "РџСЂРёРјРµСЂС‹: File=\"C:\\1C\\Base\";  РёР»Рё  Srvr=\"127.0.0.1\";Ref=\"Base\";");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(950, SHOW_DEBUG_PANEL ? 700 : 500);
         frame.setLayout(new FlowLayout());
@@ -52,7 +52,7 @@ public class Run1CBase {
         panel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        inputPanel.add(new JLabel("Введите адрес БД:"));
+        inputPanel.add(new JLabel("Р’РІРµРґРёС‚Рµ Р°РґСЂРµСЃ Р‘Р”:"));
 
         historyModel = new DefaultComboBoxModel<>();
         for (String addr : getHistoryList()) {
@@ -61,25 +61,26 @@ public class Run1CBase {
         addressComboBox = new JComboBox<>(historyModel);
         addressComboBox.setEditable(true);
         addressComboBox.setPreferredSize(new Dimension(450, 25));
+        addressComboBox.setToolTipText("РќР°РїСЂРёРјРµСЂ File=\"C:\\1C\\Base\"  РёР»Рё  Srvr=\"127.0.0.1\";Ref=\"Base\"");
         inputPanel.add(addressComboBox);
         panel.add(inputPanel);
 
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         // JPanel hintPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        // hintPanel.add(new JLabel("Примеры: File=\"C:\\1C\\Base\";  или  Srvr=\"127.0.0.1\";Ref=\"Base\";"));
+        // hintPanel.add(new JLabel("РџСЂРёРјРµСЂС‹: File=\"C:\\1C\\Base\";  РёР»Рё  Srvr=\"127.0.0.1\";Ref=\"Base\";"));
         // hintPanel.setFont(new Font("Arial", Font.ITALIC, 10));
         // panel.add(hintPanel);
 
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
         JPanel modePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        modePanel.add(new JLabel("Режим запуска:"));
+        modePanel.add(new JLabel("Р РµР¶РёРј Р·Р°РїСѓСЃРєР°:"));
 
-        designerRadio = new JRadioButton("Конфигуратор", true);
-        thinRadio = new JRadioButton("Тонкий клиент");
-        thickOrdinaryRadio = new JRadioButton("Толстый клиент (Обычное приложение)");
-        thickManagedRadio = new JRadioButton("Толстый клиент (Управляемое приложение)");
+        designerRadio = new JRadioButton("РљРѕРЅС„РёРіСѓСЂР°С‚РѕСЂ", true);
+        thinRadio = new JRadioButton("РўРѕРЅРєРёР№ РєР»РёРµРЅС‚");
+        thickOrdinaryRadio = new JRadioButton("РўРѕР»СЃС‚С‹Р№ РєР»РёРµРЅС‚ (РћР±С‹С‡РЅРѕРµ РїСЂРёР»РѕР¶РµРЅРёРµ)");
+        thickManagedRadio = new JRadioButton("РўРѕР»СЃС‚С‹Р№ РєР»РёРµРЅС‚ (РЈРїСЂР°РІР»СЏРµРјРѕРµ РїСЂРёР»РѕР¶РµРЅРёРµ)");
 
         modeGroup = new ButtonGroup();
         modeGroup.add(designerRadio);
@@ -98,7 +99,7 @@ public class Run1CBase {
         panel.add(modePanel);
         panel.add(Box.createRigidArea(new Dimension(0, 15)));
 
-        JButton button = new JButton("Сформировать");
+        JButton button = new JButton("РЎС„РѕСЂРјРёСЂРѕРІР°С‚СЊ");
         button.addActionListener(e -> handleButtonClick());
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         buttonPanel.add(button);
@@ -106,8 +107,8 @@ public class Run1CBase {
 
         panel.add(Box.createRigidArea(new Dimension(0, 15)));
 
-        // Блок для x86
-        panel.add(new JLabel("Команда для 32-битной платформы (x86):"));
+        // Р‘Р»РѕРє РґР»СЏ x86
+        panel.add(new JLabel("РљРѕРјР°РЅРґР° РґР»СЏ 32-Р±РёС‚РЅРѕР№ РїР»Р°С‚С„РѕСЂРјС‹ (x86):"));
         JPanel p86 = new JPanel(new BorderLayout(5, 0));
         outputArea86 = new JTextArea(4, 85);
         outputArea86.setEditable(false);
@@ -118,7 +119,7 @@ public class Run1CBase {
         JPanel buttonPanel86 = new JPanel(new GridLayout(2, 1, 5, 5));
         JButton copy86 = new JButton("Copy");
         copy86.addActionListener(e -> copyToClipboard(outputArea86.getText()));
-        JButton run86 = new JButton("Запустить");
+        JButton run86 = new JButton("Р—Р°РїСѓСЃС‚РёС‚СЊ");
         run86.addActionListener(e -> runCommand(outputArea86.getText(), "x86"));
         buttonPanel86.add(copy86);
         buttonPanel86.add(run86);
@@ -127,8 +128,8 @@ public class Run1CBase {
 
         panel.add(Box.createRigidArea(new Dimension(0, 10)));
 
-        // Блок для x64
-        panel.add(new JLabel("Команда для 64-битной платформы (x64):"));
+        // Р‘Р»РѕРє РґР»СЏ x64
+        panel.add(new JLabel("РљРѕРјР°РЅРґР° РґР»СЏ 64-Р±РёС‚РЅРѕР№ РїР»Р°С‚С„РѕСЂРјС‹ (x64):"));
         JPanel p64 = new JPanel(new BorderLayout(5, 0));
         outputArea = new JTextArea(4, 85);
         outputArea.setEditable(false);
@@ -139,7 +140,7 @@ public class Run1CBase {
         JPanel buttonPanel64 = new JPanel(new GridLayout(2, 1, 5, 5));
         JButton copy64 = new JButton("Copy");
         copy64.addActionListener(e -> copyToClipboard(outputArea.getText()));
-        JButton run64 = new JButton("Запустить");
+        JButton run64 = new JButton("Р—Р°РїСѓСЃС‚РёС‚СЊ");
         run64.addActionListener(e -> runCommand(outputArea.getText(), "x64"));
         buttonPanel64.add(copy64);
         buttonPanel64.add(run64);
@@ -148,7 +149,7 @@ public class Run1CBase {
 
         if (SHOW_DEBUG_PANEL) {
             panel.add(Box.createRigidArea(new Dimension(0, 10)));
-            panel.add(new JLabel("Отладка (вывод команды и ошибок):"));
+            panel.add(new JLabel("РћС‚Р»Р°РґРєР° (РІС‹РІРѕРґ РєРѕРјР°РЅРґС‹ Рё РѕС€РёР±РѕРє):"));
             debugArea = new JTextArea(8, 85);
             debugArea.setEditable(false);
             debugArea.setFont(new Font("Monospaced", Font.PLAIN, 11));
@@ -167,14 +168,14 @@ public class Run1CBase {
         frame.getRootPane().getActionMap().put("closeWindow", new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                saveHistoryToXml(); // сохраняем перед выходом
+                saveHistoryToXml(); // СЃРѕС…СЂР°РЅСЏРµРј РїРµСЂРµРґ РІС‹С…РѕРґРѕРј
                 System.exit(0);
             }
         });
 
         frame.setVisible(true);
 
-        // Контекстное меню для редактируемой части комбобокса
+        // РљРѕРЅС‚РµРєСЃС‚РЅРѕРµ РјРµРЅСЋ РґР»СЏ СЂРµРґР°РєС‚РёСЂСѓРµРјРѕР№ С‡Р°СЃС‚Рё РєРѕРјР±РѕР±РѕРєСЃР°
         Component editorComp = addressComboBox.getEditor().getEditorComponent();
         if (editorComp instanceof JTextComponent) {
             addContextMenu((JTextComponent) editorComp);
@@ -189,7 +190,7 @@ public class Run1CBase {
     }
 
     // -----------------------------------------------------------------
-    // Работа с историей в XML (домашняя папка)
+    // Р Р°Р±РѕС‚Р° СЃ РёСЃС‚РѕСЂРёРµР№ РІ XML (РґРѕРјР°С€РЅСЏСЏ РїР°РїРєР°)
     // -----------------------------------------------------------------
     private static Path getHistoryPath() {
         String userHome = System.getProperty("user.home");
@@ -197,7 +198,7 @@ public class Run1CBase {
         try {
             Files.createDirectories(dir);
         } catch (IOException e) {
-            System.err.println("Не удалось создать директорию для истории: " + dir);
+            System.err.println("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ РґРёСЂРµРєС‚РѕСЂРёСЋ РґР»СЏ РёСЃС‚РѕСЂРёРё: " + dir);
         }
         return dir.resolve(HISTORY_FILE);
     }
@@ -221,17 +222,17 @@ public class Run1CBase {
                 }
             }
         } catch (ParserConfigurationException | SAXException | IOException e) {
-            System.err.println("Ошибка загрузки истории из XML. Будет создан новый файл.");
+            System.err.println("РћС€РёР±РєР° Р·Р°РіСЂСѓР·РєРё РёСЃС‚РѕСЂРёРё РёР· XML. Р‘СѓРґРµС‚ СЃРѕР·РґР°РЅ РЅРѕРІС‹Р№ С„Р°Р№Р».");
             e.printStackTrace();
-            // Если файл повреждён, пересоздаём его с пустой историей
+            // Р•СЃР»Рё С„Р°Р№Р» РїРѕРІСЂРµР¶РґС‘РЅ, РїРµСЂРµСЃРѕР·РґР°С‘Рј РµРіРѕ СЃ РїСѓСЃС‚РѕР№ РёСЃС‚РѕСЂРёРµР№
             createDefaultHistoryFile(path);
         }
         return list;
     }
 
     private static void loadHistoryFromXml() {
-        // данные уже загружены через getHistoryList(), вызываемого из main перед созданием модели
-        // всё уже готово
+        // РґР°РЅРЅС‹Рµ СѓР¶Рµ Р·Р°РіСЂСѓР¶РµРЅС‹ С‡РµСЂРµР· getHistoryList(), РІС‹Р·С‹РІР°РµРјРѕРіРѕ РёР· main РїРµСЂРµРґ СЃРѕР·РґР°РЅРёРµРј РјРѕРґРµР»Рё
+        // РІСЃС‘ СѓР¶Рµ РіРѕС‚РѕРІРѕ
     }
 
     private static void createDefaultHistoryFile(Path path) {
@@ -243,18 +244,18 @@ public class Run1CBase {
             Element root = doc.createElement("history");
             doc.appendChild(root);
 
-            // Комментарий (в XML комментарии - отдельная конструкция)
+            // РљРѕРјРјРµРЅС‚Р°СЂРёР№ (РІ XML РєРѕРјРјРµРЅС‚Р°СЂРёРё - РѕС‚РґРµР»СЊРЅР°СЏ РєРѕРЅСЃС‚СЂСѓРєС†РёСЏ)
             root.appendChild(doc.createComment(
-                    " Файл истории адресов баз 1С.\n" +
-                            " Содержит последние использованные адреса для быстрого выбора.\n" +
-                            " Если удалить или очистить этот файл, история будет восстановлена при следующем запуске программы (пустая).\n" +
-                            " Рекомендуется не редактировать файл вручную. Если всё же редактируете, сделайте резервную копию.\n"
+                    " Р¤Р°Р№Р» РёСЃС‚РѕСЂРёРё Р°РґСЂРµСЃРѕРІ Р±Р°Р· 1РЎ.\n" +
+                            " РЎРѕРґРµСЂР¶РёС‚ РїРѕСЃР»РµРґРЅРёРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРЅС‹Рµ Р°РґСЂРµСЃР° РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РІС‹Р±РѕСЂР°.\n" +
+                            " Р•СЃР»Рё СѓРґР°Р»РёС‚СЊ РёР»Рё РѕС‡РёСЃС‚РёС‚СЊ СЌС‚РѕС‚ С„Р°Р№Р», РёСЃС‚РѕСЂРёСЏ Р±СѓРґРµС‚ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅР° РїСЂРё СЃР»РµРґСѓСЋС‰РµРј Р·Р°РїСѓСЃРєРµ РїСЂРѕРіСЂР°РјРјС‹ (РїСѓСЃС‚Р°СЏ).\n" +
+                            " Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ РЅРµ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ С„Р°Р№Р» РІСЂСѓС‡РЅСѓСЋ. Р•СЃР»Рё РІСЃС‘ Р¶Рµ СЂРµРґР°РєС‚РёСЂСѓРµС‚Рµ, СЃРґРµР»Р°Р№С‚Рµ СЂРµР·РµСЂРІРЅСѓСЋ РєРѕРїРёСЋ.\n"
             ));
 
             Element addresses = doc.createElement("addresses");
             root.appendChild(addresses);
 
-            // Пустой список - не добавляем ни одного элемента address
+            // РџСѓСЃС‚РѕР№ СЃРїРёСЃРѕРє - РЅРµ РґРѕР±Р°РІР»СЏРµРј РЅРё РѕРґРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° address
 
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
@@ -265,16 +266,16 @@ public class Run1CBase {
             StreamResult result = new StreamResult(path.toFile());
             transformer.transform(source, result);
         } catch (Exception e) {
-            System.err.println("Не удалось создать файл истории по умолчанию: " + path);
+            System.err.println("РќРµ СѓРґР°Р»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ С„Р°Р№Р» РёСЃС‚РѕСЂРёРё РїРѕ СѓРјРѕР»С‡Р°РЅРёСЋ: " + path);
             e.printStackTrace();
         }
     }
 
     private static void addToHistory(String address) {
         if (address == null || address.isEmpty()) return;
-        // Удаляем старый дубликат
+        // РЈРґР°Р»СЏРµРј СЃС‚Р°СЂС‹Р№ РґСѓР±Р»РёРєР°С‚
         historyModel.removeElement(address);
-        // Добавляем в начало
+        // Р”РѕР±Р°РІР»СЏРµРј РІ РЅР°С‡Р°Р»Рѕ
         historyModel.insertElementAt(address, 0);
         while (historyModel.getSize() > MAX_HISTORY_SIZE) {
             historyModel.removeElementAt(historyModel.getSize() - 1);
@@ -294,10 +295,10 @@ public class Run1CBase {
             doc.appendChild(root);
 
             root.appendChild(doc.createComment(
-                    " Файл истории адресов баз 1С.\n" +
-                            " Содержит последние использованные адреса для быстрого выбора.\n" +
-                            " Если удалить или очистить этот файл, история будет восстановлена при следующем запуске программы (пустая).\n" +
-                            " Рекомендуется не редактировать файл вручную. Если всё же редактируете, сделайте резервную копию.\n"
+                    " Р¤Р°Р№Р» РёСЃС‚РѕСЂРёРё Р°РґСЂРµСЃРѕРІ Р±Р°Р· 1РЎ.\n" +
+                            " РЎРѕРґРµСЂР¶РёС‚ РїРѕСЃР»РµРґРЅРёРµ РёСЃРїРѕР»СЊР·РѕРІР°РЅРЅС‹Рµ Р°РґСЂРµСЃР° РґР»СЏ Р±С‹СЃС‚СЂРѕРіРѕ РІС‹Р±РѕСЂР°.\n" +
+                            " Р•СЃР»Рё СѓРґР°Р»РёС‚СЊ РёР»Рё РѕС‡РёСЃС‚РёС‚СЊ СЌС‚РѕС‚ С„Р°Р№Р», РёСЃС‚РѕСЂРёСЏ Р±СѓРґРµС‚ РІРѕСЃСЃС‚Р°РЅРѕРІР»РµРЅР° РїСЂРё СЃР»РµРґСѓСЋС‰РµРј Р·Р°РїСѓСЃРєРµ РїСЂРѕРіСЂР°РјРјС‹ (РїСѓСЃС‚Р°СЏ).\n" +
+                            " Р РµРєРѕРјРµРЅРґСѓРµС‚СЃСЏ РЅРµ СЂРµРґР°РєС‚РёСЂРѕРІР°С‚СЊ С„Р°Р№Р» РІСЂСѓС‡РЅСѓСЋ. Р•СЃР»Рё РІСЃС‘ Р¶Рµ СЂРµРґР°РєС‚РёСЂСѓРµС‚Рµ, СЃРґРµР»Р°Р№С‚Рµ СЂРµР·РµСЂРІРЅСѓСЋ РєРѕРїРёСЋ.\n"
             ));
 
             Element addresses = doc.createElement("addresses");
@@ -319,38 +320,38 @@ public class Run1CBase {
             StreamResult result = new StreamResult(path.toFile());
             transformer.transform(source, result);
         } catch (Exception e) {
-            System.err.println("Ошибка сохранения истории в XML: " + e.getMessage());
+            System.err.println("РћС€РёР±РєР° СЃРѕС…СЂР°РЅРµРЅРёСЏ РёСЃС‚РѕСЂРёРё РІ XML: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
     // -----------------------------------------------------------------
-    // Остальной код (без изменений, кроме небольших правок)
+    // РћСЃС‚Р°Р»СЊРЅРѕР№ РєРѕРґ (Р±РµР· РёР·РјРµРЅРµРЅРёР№, РєСЂРѕРјРµ РЅРµР±РѕР»СЊС€РёС… РїСЂР°РІРѕРє)
     // -----------------------------------------------------------------
     private static boolean isDatabaseAddress(String text) {
-        if (text == null || text.isEmpty()) return false;
-        String lower = text.toLowerCase();
-        return lower.contains("file=") || lower.contains("srvr=");
-    }
+    if (text == null || text.isEmpty()) return false;
+    String trimmed = text.trim();
+    // РџСЂРѕРІРµСЂСЏРµРј, С‡С‚Рѕ СЃС‚СЂРѕРєР° РќРђР§РРќРђР•РўРЎРЇ СЃ File= РёР»Рё Srvr=
+    return trimmed.startsWith("File=") || trimmed.startsWith("Srvr=");
+}
 
-    private static void autoPasteFromClipboard() {
-        try {
-            java.awt.datatransfer.Clipboard clipboard = java.awt.Toolkit.getDefaultToolkit().getSystemClipboard();
-            java.awt.datatransfer.Transferable contents = clipboard.getContents(null);
-            if (contents != null && contents.isDataFlavorSupported(java.awt.datatransfer.DataFlavor.stringFlavor)) {
-                String text = (String) contents.getTransferData(java.awt.datatransfer.DataFlavor.stringFlavor);
-                if (isDatabaseAddress(text)) {
-                    addressComboBox.setSelectedItem(text);
-                    JOptionPane.showMessageDialog(null,
-                            "? Обнаружен адрес базы 1С в буфере обмена!\n\nАвтоматически вставлено:\n" + text,
-                            "Автовставка из буфера", JOptionPane.INFORMATION_MESSAGE);
-                }
+private static void autoPasteFromClipboard() {
+    try {
+        java.awt.datatransfer.Clipboard clipboard = java.awt.Toolkit.getDefaultToolkit().getSystemClipboard();
+        java.awt.datatransfer.Transferable contents = clipboard.getContents(null);
+        if (contents != null && contents.isDataFlavorSupported(java.awt.datatransfer.DataFlavor.stringFlavor)) {
+            String text = (String) contents.getTransferData(java.awt.datatransfer.DataFlavor.stringFlavor);
+            if (isDatabaseAddress(text)) {
+                addressComboBox.setSelectedItem(text);
+                JOptionPane.showMessageDialog(null,
+                        "РћР±РЅР°СЂСѓР¶РµРЅ Р°РґСЂРµСЃ Р±Р°Р·С‹ 1РЎ РІ Р±СѓС„РµСЂРµ РѕР±РјРµРЅР°!\n\nРђРІС‚РѕРјР°С‚РёС‡РµСЃРєРё РІСЃС‚Р°РІР»РµРЅРѕ:\n" + text,
+                        "РђРІС‚РѕРІСЃС‚Р°РІРєР° РёР· Р±СѓС„РµСЂР°", JOptionPane.INFORMATION_MESSAGE);
             }
-        } catch (Exception e) {
-            // игнорируем
         }
+    } catch (Exception e) {
+        // РРіРЅРѕСЂРёСЂСѓРµРј
     }
-
+}
     private static String getCurrentAddress() {
         Object sel = addressComboBox.getSelectedItem();
         return sel == null ? "" : sel.toString().trim();
@@ -367,12 +368,12 @@ public class Run1CBase {
         String text = getCurrentAddress();
         if (text.isEmpty()) {
             JOptionPane.showMessageDialog(null,
-                    "Пожалуйста, введите адрес базы данных!\n\nФайловая БД: File=\"C:\\1C\\Base\"\nКлиент-сервер: Srvr=\"127.0.0.1\";Ref=\"Base\";",
-                    "Предупреждение", JOptionPane.WARNING_MESSAGE);
+                    "РџРѕР¶Р°Р»СѓР№СЃС‚Р°, РІРІРµРґРёС‚Рµ Р°РґСЂРµСЃ Р±Р°Р·С‹ РґР°РЅРЅС‹С…!\n\nР¤Р°Р№Р»РѕРІР°СЏ Р‘Р”: File=\"C:\\1C\\Base\"\nРљР»РёРµРЅС‚-СЃРµСЂРІРµСЂ: Srvr=\"127.0.0.1\";Ref=\"Base\";",
+                    "РџСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        addToHistory(text); // сохраняем в историю
+        addToHistory(text); // СЃРѕС…СЂР°РЅСЏРµРј РІ РёСЃС‚РѕСЂРёСЋ
 
         String commandPart = getCommandPart();
         outputArea86.setText("");
@@ -389,11 +390,11 @@ public class Run1CBase {
 
     private static void runCommand(String command, String platform) {
         if (command == null || command.isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Нет команды для запуска!", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "РќРµС‚ РєРѕРјР°РЅРґС‹ РґР»СЏ Р·Р°РїСѓСЃРєР°!", "РћС€РёР±РєР°", JOptionPane.ERROR_MESSAGE);
             return;
         }
         if (SHOW_DEBUG_PANEL && debugArea != null) {
-            debugArea.append("=== Запуск (" + platform + ") ===\nКоманда: " + command + "\n");
+            debugArea.append("=== Р—Р°РїСѓСЃРє (" + platform + ") ===\nРљРѕРјР°РЅРґР°: " + command + "\n");
         }
         try {
             List<String> args = parseCommand(command);
@@ -407,26 +408,26 @@ public class Run1CBase {
             while ((line = reader.readLine()) != null) output.append(line).append("\n");
 
             boolean finished = process.waitFor(3, java.util.concurrent.TimeUnit.SECONDS);
-            String mode = designerRadio.isSelected() ? "Конфигуратор" :
-                    thinRadio.isSelected() ? "Тонкий клиент" :
-                            thickOrdinaryRadio.isSelected() ? "Толстый клиент (Обычное)" : "Толстый клиент (Управляемое)";
+            String mode = designerRadio.isSelected() ? "РљРѕРЅС„РёРіСѓСЂР°С‚РѕСЂ" :
+                    thinRadio.isSelected() ? "РўРѕРЅРєРёР№ РєР»РёРµРЅС‚" :
+                            thickOrdinaryRadio.isSelected() ? "РўРѕР»СЃС‚С‹Р№ РєР»РёРµРЅС‚ (РћР±С‹С‡РЅРѕРµ)" : "РўРѕР»СЃС‚С‹Р№ РєР»РёРµРЅС‚ (РЈРїСЂР°РІР»СЏРµРјРѕРµ)";
 
             if (finished) {
                 int code = process.exitValue();
                 if (code == 0) {
                     if (SHOW_RUN_MESSAGE)
-                        JOptionPane.showMessageDialog(null, "? " + mode + " успешно запущен!\nБаза: " + getCurrentAddress() + "\nПлатформа: " + platform, "Запуск 1С", JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "? " + mode + " СѓСЃРїРµС€РЅРѕ Р·Р°РїСѓС‰РµРЅ!\nР‘Р°Р·Р°: " + getCurrentAddress() + "\nРџР»Р°С‚С„РѕСЂРјР°: " + platform, "Р—Р°РїСѓСЃРє 1РЎ", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(null, "? Ошибка запуска " + mode + "!\nКод: " + code, "Ошибка", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "? РћС€РёР±РєР° Р·Р°РїСѓСЃРєР° " + mode + "!\nРљРѕРґ: " + code, "РћС€РёР±РєР°", JOptionPane.ERROR_MESSAGE);
                 }
             } else {
                 if (SHOW_RUN_MESSAGE)
-                    JOptionPane.showMessageDialog(null, "? " + mode + " запущен (фоновый процесс).\nБаза: " + getCurrentAddress(), "Запуск 1С", JOptionPane.INFORMATION_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "? " + mode + " Р·Р°РїСѓС‰РµРЅ (С„РѕРЅРѕРІС‹Р№ РїСЂРѕС†РµСЃСЃ).\nР‘Р°Р·Р°: " + getCurrentAddress(), "Р—Р°РїСѓСЃРє 1РЎ", JOptionPane.INFORMATION_MESSAGE);
             }
-            if (SHOW_DEBUG_PANEL && debugArea != null) debugArea.append("=== Конец запуска ===\n\n");
+            if (SHOW_DEBUG_PANEL && debugArea != null) debugArea.append("=== РљРѕРЅРµС† Р·Р°РїСѓСЃРєР° ===\n\n");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Ошибка запуска: " + e.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
-            if (SHOW_DEBUG_PANEL && debugArea != null) debugArea.append("Исключение: " + e + "\n");
+            JOptionPane.showMessageDialog(null, "РћС€РёР±РєР° Р·Р°РїСѓСЃРєР°: " + e.getMessage(), "РћС€РёР±РєР°", JOptionPane.ERROR_MESSAGE);
+            if (SHOW_DEBUG_PANEL && debugArea != null) debugArea.append("РСЃРєР»СЋС‡РµРЅРёРµ: " + e + "\n");
         }
     }
 
@@ -460,13 +461,13 @@ public class Run1CBase {
 
     private static void addContextMenu(JTextComponent comp) {
         JPopupMenu menu = new JPopupMenu();
-        JMenuItem paste = new JMenuItem("Вставить");
+        JMenuItem paste = new JMenuItem("Р’СЃС‚Р°РІРёС‚СЊ");
         paste.addActionListener(e -> comp.paste());
-        JMenuItem cut = new JMenuItem("Вырезать");
+        JMenuItem cut = new JMenuItem("Р’С‹СЂРµР·Р°С‚СЊ");
         cut.addActionListener(e -> comp.cut());
-        JMenuItem copy = new JMenuItem("Копировать");
+        JMenuItem copy = new JMenuItem("РљРѕРїРёСЂРѕРІР°С‚СЊ");
         copy.addActionListener(e -> comp.copy());
-        JMenuItem selectAll = new JMenuItem("Выделить всё");
+        JMenuItem selectAll = new JMenuItem("Р’С‹РґРµР»РёС‚СЊ РІСЃС‘");
         selectAll.addActionListener(e -> comp.selectAll());
         menu.add(paste);
         menu.add(cut);
@@ -480,6 +481,6 @@ public class Run1CBase {
         if (text == null || text.isEmpty()) return;
         java.awt.datatransfer.StringSelection sel = new java.awt.datatransfer.StringSelection(text);
         java.awt.Toolkit.getDefaultToolkit().getSystemClipboard().setContents(sel, null);
-        JOptionPane.showMessageDialog(null, "Команда скопирована в буфер обмена!", "Успешно", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "РљРѕРјР°РЅРґР° СЃРєРѕРїРёСЂРѕРІР°РЅР° РІ Р±СѓС„РµСЂ РѕР±РјРµРЅР°!", "РЈСЃРїРµС€РЅРѕ", JOptionPane.INFORMATION_MESSAGE);
     }
 }
